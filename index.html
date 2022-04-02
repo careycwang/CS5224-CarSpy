@@ -20,7 +20,7 @@
 		<script src="/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+		<script src="../js/getuser.js"></script>
 		<script>
 	        // define the callAPI function that takes a first name and last name as parameters
 	        var displayModels = ()=>{
@@ -115,14 +115,6 @@
 				.catch(error => console.log('error', error));
 			}
 
-			import { Auth } from 'aws-amplify';
-
-			const { attributes } = await Auth.currentAuthenticatedUser({
-				bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-			}).then(user => console.log(user))
-			.catch(err => console.log(err));
-			alert(attributes);
-			//  Auth.currentAuthenticatedUser
 	    </script>
 	</head>
 
