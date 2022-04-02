@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Auto Club</title>
+
+		<link href="css/master.css" rel="stylesheet">
+
+		<!-- SWITCHER -->
+		<link rel="stylesheet" id="switcher-css" type="text/css" href="assets/switcher/css/switcher.css" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color1.css" title="color1" media="all" data-default-color="true" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color2.css" title="color2" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color3.css" title="color3" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color4.css" title="color4" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color5.css" title="color5" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color6.css" title="color6" media="all" />
+
+		<!--[if lt IE 9]>
+		<script src="/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<script>
+		document.addEventListener("DOMContentLoaded", function(){
+			const queryString = window.location.search;
+			if (queryString === "" || queryString === "No item found!") {
+				return;
+			}
+			const urlParams = new URLSearchParams(queryString);
+			const listingbody = urlParams.get('listingbody');
+			var listings = JSON.parse(listingbody);
+			console.log(listings);
+			var listings_length = listings.length;
+			var carDivs = document.getElementsByClassName("carDiv");
+
+			for (i = 0; i < listings_length; i++) {
+				carDivs[i].querySelector("p").innerHTML = JSON.stringify(listings[i]);
+			}
+		});
+		</script>
+
+	</head>
+	<body class="m-listings" data-scrolling-animations="true" >
+
+		<nav class="b-nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3 col-xs-4">
+						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
+							<h3><a href="index.html">Auto<span>Club</span></a></h3>
+							<h2><a href="index.html">AUTO DEALER TEMPLATE</a></h2>
+						</div>
+					</div>
+					<div class="col-sm-9 col-xs-8">
+						<div class="b-nav__list wow slideInRight" data-wow-delay="0.3s">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+							</div>
+							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
+								<ul class="navbar-nav-menu">
+									<li><a href="index.html">Home</a></li>
+									<li><a href="listings.html">listing</a></li>
+									<li><a href="about.html">About</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav><!--b-nav-->
+
+		<section class="b-pageHeader">
+			<div class="container">
+				<h1 class=" wow zoomInLeft" data-wow-delay="0.5s">Auto Listings</h1>
+			</div>
+		</section><!--b-pageHeader-->
+
+		<div class="b-breadCumbs s-shadow">
+			<div class="container wow zoomInUp" data-wow-delay="0.5s">
+				<a href="index.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listings.html" class="b-breadCumbs__page m-active">Search Results</a>
+			</div>
+		</div><!--b-breadCumbs-->
+
+		<section class="b-items s-shadow">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-9 col-sm-8 col-xs-12">
+						<div class="b-items__cars">
+							<div class="b-items__cars-one wow zoomInUp carDiv" data-wow-delay="0.5s">
+								<div class="b-items__cars-one-img">
+									<img src="media/270x230/dodge.jpg" alt='dodge'>
+								</div>
+								<div class="b-items__cars-one-info">
+									<header class="b-items__cars-one-info-header s-lineDownLeft">
+										<h2>Chevrolet Silverado 1500</h2>
+										<span>$29,415</span>
+									</header>
+									<p>
+										In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the Silverado handles more like a big car than a big truck.
+									</p>
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-tachometer"></span> 31,730 KM
+									</div>
+									<div class="b-items__cars-one-info-details">
+										<div class="b-featured__item-links">
+											<a>Registered 2017</a>
+											<a>Used</a>
+											<a>8-Speed Automatic</a>
+											<a>Petrol</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="b-items__cars-one wow zoomInUp carDiv" data-wow-delay="0.5s">
+								<div class="b-items__cars-one-img">
+									<img src="media/270x230/ferrari.jpg" alt="ferrari">
+								</div>
+								<div class="b-items__cars-one-info">
+									<header class="b-items__cars-one-info-header s-lineDownLeft">
+										<h2>2017 Ferrari LaFerrari</h2>
+										<span>$1,420,112</span>
+									</header>
+									<p>
+										Above sports cars, there are exotic sports cars. And the LaFerrari is poised to be the king of all exotic sports cars. Its 789-hp V-12 gets a 161-hp boost from an electric motor
+									</p>
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-tachometer"></span> 35,000 KM
+									</div>
+									<div class="b-items__cars-one-info-details">
+										<div class="b-featured__item-links">
+											<a>Registered 2017</a>
+											<a>Used</a>
+											<a>7-Speed Automatic</a>
+											<a>Petrol</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="b-items__cars-one wow zoomInUp carDiv" data-wow-delay="0.5s">
+								<div class="b-items__cars-one-img">
+									<img src="media/270x230/jaguarList.jpg" alt='jaguar'>
+								</div>
+								<div class="b-items__cars-one-info">
+									<header class="b-items__cars-one-info-header s-lineDownLeft">
+										<h2>Jaguar XF 2017</h2>
+										<span>$51,170</span>
+									</header>
+									<p>
+										With curvy lines, gorgeous wood, and leather interiors—and performance—the XF combines all there is to love about Jaguars. The 240-hp, 2.0-liter turbocharged
+									</p>
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-tachometer"></span> 0,000 KM
+									</div>
+									<div class="b-items__cars-one-info-details">
+										<div class="b-featured__item-links">
+											<a>Registered 2017</a>
+											<a>Used</a>
+											<a>8-Speed Automatic</a>
+											<a>Petrol</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="b-items__cars-one wow zoomInUp carDiv" data-wow-delay="0.5s">
+								<div class="b-items__cars-one-img">
+									<img src="media/270x230/lexus.jpg" alt="lexus" />
+								</div>
+								<div class="b-items__cars-one-info">
+									<header class="b-items__cars-one-info-header s-lineDownLeft">
+										<h2>Lexus LS460 F Sport</h2>
+										<span>$73,445</span>
+									</header>
+									<p>
+										The LS was the first Japanese car to mix European luxury with vaunted Japanese reliability, and it continues offering that compelling combination today
+									</p>
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-tachometer"></span> 35,000 KM
+									</div>
+									<div class="b-items__cars-one-info-details">
+										<div class="b-featured__item-links">
+											<a>Registered 2017</a>
+											<a>Used</a>
+											<a>8-Speed Automatic</a>
+											<a>Petrol</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="b-items__cars-one wow zoomInUp carDiv" data-wow-delay="0.5s">
+								<div class="b-items__cars-one-img">
+									<img src="media/270x230/mersAmg.jpg" alt="amg" />
+								</div>
+								<div class="b-items__cars-one-info">
+									<header class="b-items__cars-one-info-header s-lineDownLeft">
+										<h2>Mercedes-Benz GL63 AMG</h2>
+										<span>$120,375</span>
+									</header>
+									<p>
+										The top-flight GL63 AMG is built for those who crave performance, luxury, and exclusivity
+										— you know; the                     finer things in life. AMG works its magic on the GL
+									</p>
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-tachometer"></span> 35,000 KM
+									</div>
+									<div class="b-items__cars-one-info-details">
+										<div class="b-featured__item-links">
+											<a>Registered 2017</a>
+											<a>Used</a>
+											<a>7-Speed Automatic</a>
+											<a>Petrol</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!--b-items-->
+
+		<div class="b-features">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-md-offset-3 col-xs-6 col-xs-offset-6">
+						<ul class="b-features__items">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div><!--b-features-->
+
+
+		<!--Main-->
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.custom.js"></script>
+
+		<script src="assets/rendro-easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+		<script src="js/waypoints.min.js"></script>
+		<script src="js/jquery.easypiechart.min.js"></script>
+		<script src="js/classie.js"></script>
+
+		<!--Switcher-->
+		<script src="assets/switcher/js/switcher.js"></script>
+		<!--Owl Carousel-->
+		<script src="assets/owl-carousel/owl.carousel.min.js"></script>
+		<!--bxSlider-->
+		<script src="assets/bxslider/jquery.bxslider.js"></script>
+		<!-- jQuery UI Slider -->
+		<script src="assets/slider/jquery.ui-slider.js"></script>
+
+		<!--Theme-->
+		<script src="js/jquery.smooth-scroll.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script src="js/jquery.placeholder.min.js"></script>
+		<script src="js/theme.js"></script>
+	</body>
+</html>

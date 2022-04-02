@@ -1,0 +1,596 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Home</title>
+
+		<link href="css/master.css" rel="stylesheet">
+
+		<!-- SWITCHER -->
+		<link rel="stylesheet" id="switcher-css" type="text/css" href="assets/switcher/css/switcher.css" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color1.css" title="color1" media="all" data-default-color="true" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color2.css" title="color2" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color3.css" title="color3" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color4.css" title="color4" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color5.css" title="color5" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color6.css" title="color6" media="all" />
+
+		<!--[if lt IE 9]>
+		<script src="/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<script>
+	        // define the callAPI function that takes a first name and last name as parameters
+	        var displayModels = ()=>{
+				var selectBrand = document.getElementById('selectBrand');
+				var selectModel = document.getElementById('selectModel');
+				var brand = selectBrand.value;
+
+				var length = selectModel.options.length;
+				for (i = length - 1; i >= 0; i--) {
+				  selectModel.options[i] = null;
+				}
+
+				if (brand === "") {
+					return;
+				}
+
+	            // instantiate a headers object
+	            var myHeaders = new Headers();
+	            // add content type header to object
+	            myHeaders.append("Content-Type", "application/json");
+	            // using built in JSON utility package turn object to string and store in a variable
+	            var raw = JSON.stringify({'brand': brand});
+	            // create a JSON object with parameters for API call and store in a variable
+	            var requestOptions = {
+	                method: 'POST',
+	                headers: myHeaders,
+	                body: raw,
+	                redirect: 'follow'
+	            };
+	            // make API call with parameters and use promises to get response
+	            fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+	            .then(response => response.text())
+	            .then(result => {
+					models = JSON.parse(JSON.parse(result).body);
+					var models_length = models.length;
+					for (i = 0; i < models_length; i++) {
+					  selectModel.appendChild(new Option(models[i], models[i]));
+					}
+				})
+	            .catch(error => console.log('error', error));
+	        }
+
+			// define the callAPI function that takes a first name and last name as parameters
+			var recommendPosts = ()=>{
+				var selectBrand = document.getElementById('selectBrand');
+				var selectModel = document.getElementById('selectModel');
+				var minPrice = document.getElementById('minPrice');
+				var maxPrice = document.getElementById('maxPrice');
+				var minYear = document.getElementById('minYear');
+				var maxYear = document.getElementById('maxYear');
+				if (selectBrand.value === "") {
+					return;
+				}
+				if (minPrice.value === "") {
+					minPrice.value = 3000;
+				}
+				if (maxPrice.value === "") {
+					maxPrice.value = 99999;
+				}
+				if (minYear.value === "") {
+					minYear.value = 2008;
+				}
+				if (maxYear.value === "") {
+					maxYear.value = 2020;
+				}
+
+				// instantiate a headers object
+				var myHeaders = new Headers();
+				// add content type header to object
+				myHeaders.append("Content-Type", "application/json");
+				// using built in JSON utility package turn object to string and store in a variable
+				var raw = JSON.stringify({
+					"brand": selectBrand.value,
+					"model": selectModel.value,
+					"year_range": [parseInt(minYear.value), parseInt(maxYear.value)],
+					"price_range": [parseInt(minPrice.value), parseInt(maxPrice.value)],
+					"recommend": true
+				});
+				// create a JSON object with parameters for API call and store in a variable
+				var requestOptions = {
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
+				};
+				// make API call with parameters and use promises to get response
+				fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/recommend", requestOptions)
+				.then(response => response.text())
+				.then(result => {
+					window.location.href = 'listings.html' + "?listingbody=" + JSON.parse(result).body;
+				})
+				.catch(error => console.log('error', error));
+			}
+
+			import { Auth } from 'aws-amplify';
+
+			const { attributes } = await Auth.currentAuthenticatedUser({
+				bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+			}).then(user => console.log(user))
+			.catch(err => console.log(err));
+			alert(attributes);
+			//  Auth.currentAuthenticatedUser
+	    </script>
+	</head>
+
+
+	<body class="m-index" data-scrolling-animations="true" data-equal-height=".b-auto__main-item">
+
+		<nav class="b-nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3 col-xs-4">
+						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
+							<h3><a href="index.html">Car<span>Spy</span></a></h3>
+						</div>
+					</div>
+					<div class="col-sm-9 col-xs-8">
+						<div class="b-nav__list wow slideInRight" data-wow-delay="0.3s">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+							</div>
+							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
+								<ul class="navbar-nav-menu">
+									<li><a href="index.html">Home</a></li>
+									<li><a href="listings.html">listing</a></li>
+									<li><a href="about.html">About</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav><!--b-nav-->
+
+		<section class="b-slider">
+			<div id="carousel" class="slide carousel carousel-fade">
+				<div class="carousel-inner">
+					<div class="item active">
+						<img src="media/main-slider/4.jpg" alt="sliderImg" />
+						<div class="container">
+							<div class="carousel-caption b-slider__info">
+								<h3>Best Seller</h3>
+								<h2>Toyota Camry</h2>
+								<p>Model 2019 <span>$34,900</span></p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img src="media/main-slider/5.jpg" alt="sliderImg" />
+						<div class="container">
+							<div class="carousel-caption b-slider__info">
+								<h3>Family Car</h3>
+								<h2>BMW X3</h2>
+								<p>Model 2020 <span>$65,900</span></p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img src="media/main-slider/3.jpg"  alt="sliderImg">
+						<div class="container">
+							<div class="carousel-caption b-slider__info">
+								<h3>Sports Sedan</h3>
+								<h2>Lexus GSF</h2>
+								<p>Model 2016 <span>$72,000</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control right" href="#carousel" data-slide="next">
+					<span class="fa fa-angle-right m-control-right"></span>
+				</a>
+				<a class="carousel-control left" href="#carousel" data-slide="prev">
+					<span class="fa fa-angle-left m-control-left"></span>
+				</a>
+			</div>
+		</section><!--b-slider-->
+
+
+
+
+
+
+
+
+
+
+
+		<section class="b-search">
+			<div class="container">
+				<form action="listings.html" method="POST" class="b-search__main">
+					<div class="b-search__main-title wow zoomInUp" data-wow-delay="0.3s">
+						<h2>UNSURE WHICH VEHICLE YOU ARE LOOKING FOR? FIND IT HERE</h2>
+					</div>
+					<div class="b-search__main-type wow zoomInUp" data-wow-delay="0.3s">
+
+					</div>
+					<div class="b-search__main-form wow zoomInUp" data-wow-delay="0.3s">
+						<div class="row">
+							<div class="col-xs-12 col-md-8">
+								<div class="m-firstSelects">
+									<div class="col-xs-5">
+										<select id="selectBrand" name="select1" onchange="displayModels()">
+											<option value="audi" selected="">Audi</option>
+											<option value="bmw" selected="">BMW</option>
+											<option value="ford" selected="">Ford</option>
+											<option value="hyundi" selected="">Hyundai</option>
+											<option value="merc" selected="">Mercedes-Benz</option>
+											<option value="skoda" selected="">Skoda</option>
+											<option value="toyota" selected="">Toyota</option>
+											<option value="vauxhall" selected="">Vauxhall</option>
+											<option value="vw" selected="">Volkswagen</option>
+											<option value="" selected="">--Choose Brand--</option>
+										</select>
+										<span class="fa fa-caret-down"></span>
+										<p>BRAND?</p>
+									</div>
+									<div class="col-xs-5">
+										<select id="selectModel" name="select2">
+										</select>
+										<span class="fa fa-caret-down"></span>
+										<p>MODEL?</p>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-md-4 col-xs-12 text-left s-noPadding">
+								<div id="slidePriceDiv" class="b-search__main-form-range">
+									<label>PRICE RANGE</label>
+									<div class="slider"></div>
+									<input id="minPrice" type="hidden" name="min" class="j-min" />
+									<input id="maxPrice" type="hidden" name="max" class="j-max" />
+								</div>
+								<div id="slideYearDiv" class="b-search__main-form-range">
+									<label>YEAR RANGE</label>
+									<div class="slider"></div>
+									<input id="minYear" type="hidden" name="min" class="j-min" />
+									<input id="maxYear" type="hidden" name="max" class="j-max" />
+								</div>
+								<div class="b-search__main-form-submit" style="margin-top: 200px;">
+									<!-- <a href="#">Advanced search</a> -->
+									<button type="button" class="btn m-btn" onclick="recommendPosts()">Recommend Car Postings<span class="fa fa-angle-right"></span></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section><!--b-search-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<section class="b-featured">
+			<div class="container">
+				<h2 class="s-title wow zoomInUp" data-wow-delay="0.3s">Featured Vehicles</h2>
+				<div id="carousel-small" class="owl-carousel enable-owl-carousel" data-items="4" data-navigation="true" data-auto-play="true" data-stop-on-hover="true" data-items-desktop="4" data-items-desktop-small="4" data-items-tablet="3" data-items-tablet-small="2">
+					<div>
+						<div class="b-featured__item wow rotateIn" data-wow-delay="0.3s" data-wow-offset="150">
+							<a>
+								<img src="media/186x113/mers.jpg" alt="mers" />
+							</a>
+							<div class="b-featured__item-price">
+								$114,900
+							</div>
+							<div class="clearfix"></div>
+							<h5><a>MERCEDES-AMG GT</a></h5>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>35,000 MILE</div>
+							<div class="b-featured__item-links">
+								<a>2015</a>
+								<a>Auto</a>
+								<a>Yellow</a>
+								<a>Petrol</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="b-featured__item wow rotateIn" data-wow-delay="0.3s" data-wow-offset="150">
+							<a>
+								<img src="media/186x113/audi.jpg" alt="audi" />
+							</a>
+							<div class="b-featured__item-price">
+								$95,900
+							</div>
+							<div class="clearfix"></div>
+							<h5><a>AUDI R8 SPYDER V-8</a></h5>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>50,000 MILE</div>
+							<div class="b-featured__item-links">
+								<a>2013</a>
+								<a>Auto</a>
+								<a>Champagne</a>
+								<a>Petrol</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="b-featured__item wow rotateIn" data-wow-delay="0.3s" data-wow-offset="150">
+							<a>
+								<img src="media/186x113/aston.jpg" alt="aston" />
+							</a>
+							<div class="b-featured__item-price">
+								$10,800
+							</div>
+							<div class="clearfix"></div>
+							<h5><a>ASTON MARTIN VANTAGE</a></h5>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>21,000 MILE</div>
+							<div class="b-featured__item-links">
+								<a>2018</a>
+								<a>Auto</a>
+								<a>Red</a>
+								<a>Petrol</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="b-featured__item wow rotateIn" data-wow-delay="0.3s" data-wow-offset="150">
+							<a>
+								<img src="media/186x113/jaguar.jpg" alt="jaguar" />
+							</a>
+							<div class="b-featured__item-price">
+								$89,850
+							</div>
+							<div class="clearfix"></div>
+							<h5><a>JAGUAR F-TYPE R</a></h5>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>39,000 MILE</div>
+							<div class="b-featured__item-links">
+								<a>2017</a>
+								<a>Auto</a>
+								<a>Atrovirens</a>
+								<a>Petrol</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="b-featured__item wow rotateIn" data-wow-delay="0.3s" data-wow-offset="150">
+							<a>
+								<img src="media/186x113/mers.jpg" alt="mers" />
+							</a>
+							<div class="b-featured__item-price">
+								$114,900
+							</div>
+							<div class="clearfix"></div>
+							<h5><a>MERCEDES-AMG GT</a></h5>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>35,000 MILE</div>
+							<div class="b-featured__item-links">
+								<a>2015</a>
+								<a>Auto</a>
+								<a>Yellow</a>
+								<a>Petrol</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="b-featured__item wow rotateIn" data-wow-delay="0.3s" data-wow-offset="150">
+							<a>
+								<img src="media/186x113/audi.jpg" alt="audi" />
+							</a>
+							<div class="b-featured__item-price">
+								$95,900
+							</div>
+							<div class="clearfix"></div>
+							<h5><a>AUDI R8 SPYDER V-8</a></h5>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>50,000 MILE</div>
+							<div class="b-featured__item-links">
+								<a>2013</a>
+								<a>Auto</a>
+								<a>Champagne</a>
+								<a>Petrol</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="b-featured__item wow rotateIn" data-wow-delay="0.3s" data-wow-offset="150">
+							<a>
+								<img src="media/186x113/aston.jpg" alt="aston" />
+							</a>
+							<div class="b-featured__item-price">
+								$10,800
+							</div>
+							<div class="clearfix"></div>
+							<h5><a>ASTON MARTIN VANTAGE</a></h5>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>21,000 MILE</div>
+							<div class="b-featured__item-links">
+								<a>2018</a>
+								<a>Auto</a>
+								<a>Red</a>
+								<a>Petrol</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="b-featured__item wow rotateIn" data-wow-delay="0.3s" data-wow-offset="150">
+							<a>
+								<img src="media/186x113/jaguar.jpg" alt="jaguar" />
+							</a>
+							<div class="b-featured__item-price">
+								$89,850
+							</div>
+							<div class="clearfix"></div>
+							<h5><a>JAGUAR F-TYPE R</a></h5>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>39,000 MILE</div>
+							<div class="b-featured__item-links">
+								<a>2017</a>
+								<a>Auto</a>
+								<a>Atrovirens</a>
+								<a>Petrol</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!--b-featured-->
+
+		<section class="b-welcome">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 col-md-offset-2 col-sm-6 col-xs-12">
+						<div class="b-welcome__text wow fadeInLeft" data-wow-delay="0.3s" data-wow-offset="100">
+							<h2>WORLD'S LEADING USED CAR Search Service</h2>
+							<h3>WELCOME TO carspy</h3>
+							<p>There are 100K vehicle transactions each year and we are driving change in how consumers are searching for these cars online. CarSpy aims to drive further efficiencies in the market, benefitting consumers, retailers and manufacturers.</p>
+							<p>We are continually adapting our online experience to meet the needs of our customers. This is core to remaining the UK’s largest digital automotive marketplace for used cars.</p>
+							<ul>
+								<li><span class="fa fa-check"></span><span class="fa-xs">Provide the best online car searching experience</span></li>
+								<li><span class="fa fa-check"></span><span class="fa-xs">Strive for users' most satisfied listings</span></li>
+								<li><span class="fa fa-check"></span><span class="fa-xs">Create tools to facilitate vechicle transactions</span></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-5 col-sm-6 col-xs-12">
+						<div class="b-welcome__services wow fadeInRight" data-wow-delay="0.3s" data-wow-offset="100">
+							<div class="row">
+								<div class="col-xs-6 m-padding">
+									<div class="b-welcome__services-auto">
+										<div class="b-welcome__services-img m-auto">
+											<span class="fa fa-bullseye"></span>
+										</div>
+										<h3>Accuracy</h3>
+									</div>
+								</div>
+								<div class="col-xs-6 m-padding">
+									<div class="b-welcome__services-trade">
+										<div class="b-welcome__services-img m-trade">
+											<span class="fa fa-eye-slash"></span>
+										</div>
+										<h3>Privacy</h3>
+									</div>
+								</div>
+								<div class="col-xs-12 text-center">
+									<span class="b-welcome__services-circle"></span>
+								</div>
+								<div class="col-xs-6 m-padding">
+									<div class="b-welcome__services-buying">
+										<div class="b-welcome__services-img m-buying">
+											<span class="fa fa-database"></span>
+										</div>
+										<h3>Database</h3>
+									</div>
+								</div>
+								<div class="col-xs-6 m-padding">
+									<div class="b-welcome__services-support">
+										<div class="b-welcome__services-img m-buying">
+											<span class="fa fa-flash"></span>
+										</div>
+										<h3>Fast</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!--b-welcome-->
+
+		<section class="b-count">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-11 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
+						<div class="row">
+							<div class="col-sm-3 col-xs-6">
+								<div class="b-count__item">
+									<div class="b-count__item-circle">
+										<span class="fa fa-car"></span>
+									</div>
+									<div class="chart" data-percent="300000">
+										<h2  class="percent">300000</h2>
+									</div>
+									<h5>Daily Active User</h5>
+								</div>
+							</div>
+							<div class="col-sm-3 col-xs-6">
+								<div class="b-count__item">
+									<div class="b-count__item-circle">
+										<span class="fa fa-users"></span>
+									</div>
+									<div class="chart" data-percent="80000">
+										<h2  class="percent">80000</h2>
+									</div>
+									<h5>vehicles in database</h5>
+								</div>
+							</div>
+							<div class="col-sm-3 col-xs-6">
+								<div class="b-count__item">
+									<div class="b-count__item-circle">
+										<span class="fa fa-building"></span>
+									</div>
+									<div class="chart" data-percent="180">
+										<h2  class="percent">180</h2>
+									</div>
+									<h5>Regions</h5>
+								</div>
+							</div>
+							<div class="col-sm-3 col-xs-6">
+								<div class="b-count__item j-last">
+									<div class="b-count__item-circle">
+										<span class="fa fa-thumbs-up"></span>
+									</div>
+									<div class="chart" data-percent="96">
+										<h2  class="percent">96</h2>
+									</div>
+									<h5>Good Review Rate</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!--b-count-->
+
+		<!--Main-->
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.custom.js"></script>
+
+		<script src="assets/rendro-easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+		<script src="js/waypoints.min.js"></script>
+		<script src="js/jquery.easypiechart.min.js"></script>
+		<script src="js/classie.js"></script>
+
+		<!--Switcher-->
+		<script src="assets/switcher/js/switcher.js"></script>
+		<!--Owl Carousel-->
+		<script src="assets/owl-carousel/owl.carousel.min.js"></script>
+		<!--bxSlider-->
+		<script src="assets/bxslider/jquery.bxslider.js"></script>
+		<!-- jQuery UI Slider -->
+		<script src="assets/slider/jquery.ui-slider.js"></script>
+
+		<!--Theme-->
+		<script src="js/jquery.smooth-scroll.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script src="js/jquery.placeholder.min.js"></script>
+		<script src="js/theme.js"></script>
+
+	</body>
+</html>
