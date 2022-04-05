@@ -7,13 +7,13 @@ You can click [CarSpy Link](https://cs4248-carspy.auth.us-east-1.amazoncognito.c
 ## Introduction
 This website is for automatic deployment on Amplify.
 
-### Amplify Codes
+### Amplify
 See `\css`, `\js` and `index.html` folder
 
-### Lambda Codes
+### Lambda
 See codes under `\lambda` folder
 
-### CloudFormation Codes
+### CloudFormation
 See codes under `\cloudformation` folder
 
 ## Contributor
