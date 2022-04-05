@@ -20,7 +20,7 @@
 		<script src="/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script type="module" src="../js/getuser.js"></script>
+
 		<script>
 	        // define the callAPI function that takes a first name and last name as parameters
 	        var displayModels = ()=>{
@@ -56,8 +56,13 @@
 	            .then(result => {
 					models = JSON.parse(JSON.parse(result).body);
 					var models_length = models.length;
+					sorted_models = []
 					for (i = 0; i < models_length; i++) {
-					  selectModel.appendChild(new Option(models[i], models[i]));
+						sorted_models.push(models[i])
+					}
+					sorted_models.sort();
+					for (j = 0; j < models_length; j++) {
+						selectModel.appendChild(new Option(sorted_models[j], sorted_models[j]));
 					}
 				})
 	            .catch(error => console.log('error', error));
@@ -97,7 +102,8 @@
 					"model": selectModel.value,
 					"year_range": [parseInt(minYear.value), parseInt(maxYear.value)],
 					"price_range": [parseInt(minPrice.value), parseInt(maxPrice.value)],
-					"recommend": true
+					"recommend": true,
+					"history": false
 				});
 				// create a JSON object with parameters for API call and store in a variable
 				var requestOptions = {
@@ -115,6 +121,31 @@
 				.catch(error => console.log('error', error));
 			}
 
+			var defaultListings = ()=>{
+				// instantiate a headers object
+				var myHeaders = new Headers();
+				// add content type header to object
+				myHeaders.append("Content-Type", "application/json");
+				// using built in JSON utility package turn object to string and store in a variable
+				var raw = JSON.stringify({
+					"recommend": false,
+					"history": false
+				});
+				// create a JSON object with parameters for API call and store in a variable
+				var requestOptions = {
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
+				};
+				// make API call with parameters and use promises to get response
+				fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/recommend", requestOptions)
+				.then(response => response.text())
+				.then(result => {
+					window.location.href = 'listings.html' + "?listingbody=" + JSON.parse(result).body;
+				})
+				.catch(error => console.log('error', error));
+			}
 	    </script>
 	</head>
 
@@ -142,7 +173,7 @@
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
 									<li><a href="index.html">Home</a></li>
-									<li><a href="listings.html">listing</a></li>
+									<li><a href="#" onclick="defaultListings()">listing</a></li>
 									<li><a href="about.html">About</a></li>
 								</ul>
 							</div>
@@ -161,7 +192,7 @@
 							<div class="carousel-caption b-slider__info">
 								<h3>Best Seller</h3>
 								<h2>Toyota Camry</h2>
-								<p>Model 2019 <span>$34,900</span></p>
+								<p>Model 2019 <span>$ 34900</span></p>
 							</div>
 						</div>
 					</div>
@@ -171,7 +202,7 @@
 							<div class="carousel-caption b-slider__info">
 								<h3>Family Car</h3>
 								<h2>BMW X3</h2>
-								<p>Model 2020 <span>$65,900</span></p>
+								<p>Model 2020 <span>$ 65900</span></p>
 							</div>
 						</div>
 					</div>
@@ -181,7 +212,7 @@
 							<div class="carousel-caption b-slider__info">
 								<h3>Sports Sedan</h3>
 								<h2>Lexus GSF</h2>
-								<p>Model 2016 <span>$72,000</span></p>
+								<p>Model 2016 <span>$ 72000</span></p>
 							</div>
 						</div>
 					</div>
@@ -311,11 +342,11 @@
 								<img src="media/186x113/audi.jpg" alt="audi" />
 							</a>
 							<div class="b-featured__item-price">
-								$95,900
+								$ 95900
 							</div>
 							<div class="clearfix"></div>
 							<h5><a>AUDI R8 SPYDER V-8</a></h5>
-							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>50,000 MILE</div>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>50000 MILE</div>
 							<div class="b-featured__item-links">
 								<a>2013</a>
 								<a>Auto</a>
@@ -330,11 +361,11 @@
 								<img src="media/186x113/aston.jpg" alt="aston" />
 							</a>
 							<div class="b-featured__item-price">
-								$10,800
+								$ 10800
 							</div>
 							<div class="clearfix"></div>
 							<h5><a>ASTON MARTIN VANTAGE</a></h5>
-							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>21,000 MILE</div>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>21000 MILE</div>
 							<div class="b-featured__item-links">
 								<a>2018</a>
 								<a>Auto</a>
@@ -349,11 +380,11 @@
 								<img src="media/186x113/jaguar.jpg" alt="jaguar" />
 							</a>
 							<div class="b-featured__item-price">
-								$89,850
+								$ 89850
 							</div>
 							<div class="clearfix"></div>
 							<h5><a>JAGUAR F-TYPE R</a></h5>
-							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>39,000 MILE</div>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>39000 MILE</div>
 							<div class="b-featured__item-links">
 								<a>2017</a>
 								<a>Auto</a>
@@ -368,11 +399,11 @@
 								<img src="media/186x113/mers.jpg" alt="mers" />
 							</a>
 							<div class="b-featured__item-price">
-								$114,900
+								$ 114900
 							</div>
 							<div class="clearfix"></div>
 							<h5><a>MERCEDES-AMG GT</a></h5>
-							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>35,000 MILE</div>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>35000 MILE</div>
 							<div class="b-featured__item-links">
 								<a>2015</a>
 								<a>Auto</a>
@@ -387,11 +418,11 @@
 								<img src="media/186x113/audi.jpg" alt="audi" />
 							</a>
 							<div class="b-featured__item-price">
-								$95,900
+								$ 95900
 							</div>
 							<div class="clearfix"></div>
 							<h5><a>AUDI R8 SPYDER V-8</a></h5>
-							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>50,000 MILE</div>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>50000 MILE</div>
 							<div class="b-featured__item-links">
 								<a>2013</a>
 								<a>Auto</a>
@@ -406,11 +437,11 @@
 								<img src="media/186x113/aston.jpg" alt="aston" />
 							</a>
 							<div class="b-featured__item-price">
-								$10,800
+								$ 10800
 							</div>
 							<div class="clearfix"></div>
 							<h5><a>ASTON MARTIN VANTAGE</a></h5>
-							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>21,000 MILE</div>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>21000 MILE</div>
 							<div class="b-featured__item-links">
 								<a>2018</a>
 								<a>Auto</a>
@@ -425,11 +456,11 @@
 								<img src="media/186x113/jaguar.jpg" alt="jaguar" />
 							</a>
 							<div class="b-featured__item-price">
-								$89,850
+								$ 89850
 							</div>
 							<div class="clearfix"></div>
 							<h5><a>JAGUAR F-TYPE R</a></h5>
-							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>39,000 MILE</div>
+							<div class="b-featured__item-count"><span class="fa fa-tachometer"></span>39000 MILE</div>
 							<div class="b-featured__item-links">
 								<a>2017</a>
 								<a>Auto</a>
@@ -583,7 +614,6 @@
 		<script src="js/wow.min.js"></script>
 		<script src="js/jquery.placeholder.min.js"></script>
 		<script src="js/theme.js"></script>
-		<script type="module" src="js/test2auth.js"></script>
 
 	</body>
 </html>

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Auto Club</title>
+		<title>Listings</title>
 
 		<link href="css/master.css" rel="stylesheet">
 
@@ -22,22 +22,61 @@
 		<![endif]-->
 
 		<script>
-		document.addEventListener("DOMContentLoaded", function(){
-			const queryString = window.location.search;
-			if (queryString === "" || queryString === "No item found!") {
-				return;
-			}
-			const urlParams = new URLSearchParams(queryString);
-			const listingbody = urlParams.get('listingbody');
-			var listings = JSON.parse(listingbody);
-			console.log(listings);
-			var listings_length = listings.length;
-			var carDivs = document.getElementsByClassName("carDiv");
+			var listings;
 
-			for (i = 0; i < listings_length; i++) {
-				carDivs[i].querySelector("p").innerHTML = JSON.stringify(listings[i]);
+			document.addEventListener("DOMContentLoaded", function(){
+				document.querySelector(".star").addEventListener("click", function() {
+					console.log("clicked!")
+					document.querySelector(".star").classList.remove("glyphicon-star-empty");
+					document.querySelector(".star").classList.add("glyphicon-star");
+				});
+				const queryString = window.location.search;
+				if (queryString === "") {
+					return;
+				}
+				const urlParams = new URLSearchParams(queryString);
+				const listingbody = urlParams.get('listingbody');
+				if (listingbody === "undefined") {
+					return;
+				}
+				listings = JSON.parse(listingbody);
+				if (listings === "No item found!") {
+					return;
+				}
+				console.log(listings);
+				var listings_length = listings.length;
+				var carDivs = document.getElementsByClassName("carDiv");
+
+				const brand_map = {
+					"audi": "Audi",
+					"bmw": "BMW",
+					"ford": "Ford",
+					"hyundi": "Hyundai",
+					"merc": "Mercedes-Benz",
+					"skoda": "Skoda",
+					"toyota": "Toyota",
+					"vauxhall": "Vauxhall",
+					"vw": "Volkswagen"
+				}
+				for (i = 0; i < listings_length; i++) {
+					current_listing = listings[i];
+					current_car_div = carDivs[i];
+					current_car_div.querySelector(".nametag").innerHTML = current_listing["year"] + " " + brand_map[current_listing["brand"]] + " " + current_listing["model"];
+					current_car_div.querySelector(".price").innerHTML = "$ " + current_listing["price"];
+					current_car_div.querySelector(".mileage").innerHTML = "Mileage: " + current_listing["mileage"];
+					current_car_div.querySelector(".transmission").innerHTML = "Transmission: " + current_listing["transmission"];
+					current_car_div.querySelector(".engineSize").innerHTML = "Displacement: " + current_listing["engineSize"];
+					current_car_div.querySelector(".fuelType").innerHTML = "Fuel Type: " + current_listing["fuelType"];
+					current_car_div.querySelector(".mpg").innerHTML = "MPG: " + current_listing["mpg"];
+				}
+			});
+
+			var showListingDetail = (index)=>{
+				var sent_listing = listings[parseInt(index)];
+				var carDivs = document.getElementsByClassName("carDiv");
+				sent_listing["img_src"] = carDivs[parseInt(index)].querySelector("img").src;
+				window.location.href = 'listingDetail.html' + "?listingbody=" + JSON.stringify(sent_listing);
 			}
-		});
 		</script>
 
 	</head>
@@ -48,8 +87,7 @@
 				<div class="row">
 					<div class="col-sm-3 col-xs-4">
 						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
-							<h3><a href="index.html">Auto<span>Club</span></a></h3>
-							<h2><a href="index.html">AUTO DEALER TEMPLATE</a></h2>
+							<h3><a href="index.html">Car<span>Spy</span></a></h3>
 						</div>
 					</div>
 					<div class="col-sm-9 col-xs-8">
@@ -77,13 +115,13 @@
 
 		<section class="b-pageHeader">
 			<div class="container">
-				<h1 class=" wow zoomInLeft" data-wow-delay="0.5s">Auto Listings</h1>
+				<h1 class=" wow zoomInLeft" data-wow-delay="0.5s">Listings</h1>
 			</div>
 		</section><!--b-pageHeader-->
 
 		<div class="b-breadCumbs s-shadow">
 			<div class="container wow zoomInUp" data-wow-delay="0.5s">
-				<a href="index.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listings.html" class="b-breadCumbs__page m-active">Search Results</a>
+				<a href="index.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a class="b-breadCumbs__page m-active">Listing</a>
 			</div>
 		</div><!--b-breadCumbs-->
 
@@ -98,22 +136,54 @@
 								</div>
 								<div class="b-items__cars-one-info">
 									<header class="b-items__cars-one-info-header s-lineDownLeft">
-										<h2>Chevrolet Silverado 1500</h2>
-										<span>$29,415</span>
+										<h2 class="nametag">2016 Audi A6</h2>
+										<span class="price">$ 16500</span>
 									</header>
-									<p>
-										In a pickup market gone fancy, the Silverado sticks to its basic-truck recipe. The steering is accurate, and the Silverado handles more like a big car than a big truck.
-									</p>
-									<div class="b-items__cars-one-info-km">
-										<span class="fa fa-tachometer"></span> 31,730 KM
+									<div>
+									  <span class="star glyphicon glyphicon-star-empty" style="font-size: 25px; color:gold;"></span>
 									</div>
-									<div class="b-items__cars-one-info-details">
-										<div class="b-featured__item-links">
-											<a>Registered 2017</a>
-											<a>Used</a>
-											<a>8-Speed Automatic</a>
-											<a>Petrol</a>
-										</div>
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-tachometer"></span>
+										<span class="mileage">Mileage: 36200</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class="fa fa-cogs"></span>
+										<span class="transmission">Transmission: Automatic</span>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-bars"></span>
+										<span class="engineSize">Displacement: 2.0</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;
+										<span class="fa fa-tint"></span>
+										<span class="fuelType">Fuel Type: Diesel</span>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-car"></span>
+										<span class="mpg">MPG: 64.2</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;
+										<a class="btn m-btn m-readMore wow zoomInUp" data-wow-delay="0.5s" onclick="showListingDetail(0)">view listings<span class="fa fa-angle-right"></span></a>
 									</div>
 								</div>
 							</div>
@@ -123,22 +193,51 @@
 								</div>
 								<div class="b-items__cars-one-info">
 									<header class="b-items__cars-one-info-header s-lineDownLeft">
-										<h2>2017 Ferrari LaFerrari</h2>
-										<span>$1,420,112</span>
+										<h2 class="nametag">2014 BMW 5 Series</h2>
+										<span class="price">$ 11200</span>
 									</header>
-									<p>
-										Above sports cars, there are exotic sports cars. And the LaFerrari is poised to be the king of all exotic sports cars. Its 789-hp V-12 gets a 161-hp boost from an electric motor
-									</p>
 									<div class="b-items__cars-one-info-km">
-										<span class="fa fa-tachometer"></span> 35,000 KM
+										<span class="fa fa-tachometer"></span>
+										<span class="mileage">Mileage: 67068</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class="fa fa-cogs"></span>
+										<span class="transmission">Transmission: Automatic</span>
 									</div>
-									<div class="b-items__cars-one-info-details">
-										<div class="b-featured__item-links">
-											<a>Registered 2017</a>
-											<a>Used</a>
-											<a>7-Speed Automatic</a>
-											<a>Petrol</a>
-										</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-bars"></span>
+										<span class="engineSize">Displacement: 2.0</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;
+										<span class="fa fa-tint"></span>
+										<span class="fuelType">Fuel Type: Diesel</span>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-car"></span>
+										<span class="mpg">MPG: 57.6</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;
+										<a class="btn m-btn m-readMore wow zoomInUp" data-wow-delay="0.5s" onclick="showListingDetail(1)">view listings<span class="fa fa-angle-right"></span></a>
 									</div>
 								</div>
 							</div>
@@ -148,22 +247,51 @@
 								</div>
 								<div class="b-items__cars-one-info">
 									<header class="b-items__cars-one-info-header s-lineDownLeft">
-										<h2>Jaguar XF 2017</h2>
-										<span>$51,170</span>
+										<h2 class="nametag">2017 Ford Fiesta</h2>
+										<span class="price">$ 12000</span>
 									</header>
-									<p>
-										With curvy lines, gorgeous wood, and leather interiors—and performance—the XF combines all there is to love about Jaguars. The 240-hp, 2.0-liter turbocharged
-									</p>
 									<div class="b-items__cars-one-info-km">
-										<span class="fa fa-tachometer"></span> 0,000 KM
+										<span class="fa fa-tachometer"></span>
+										<span class="mileage">Mileage: 15944</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class="fa fa-cogs"></span>
+										<span class="transmission">Transmission: Automatic</span>
 									</div>
-									<div class="b-items__cars-one-info-details">
-										<div class="b-featured__item-links">
-											<a>Registered 2017</a>
-											<a>Used</a>
-											<a>8-Speed Automatic</a>
-											<a>Petrol</a>
-										</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-bars"></span>
+										<span class="engineSize">Displacement: 1.0</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;
+										<span class="fa fa-tint"></span>
+										<span class="fuelType">Fuel Type: Petrol</span>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-car"></span>
+										<span class="mpg">MPG: 57.7</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;
+										<a class="btn m-btn m-readMore wow zoomInUp" data-wow-delay="0.5s" onclick="showListingDetail(2)">view listings<span class="fa fa-angle-right"></span></a>
 									</div>
 								</div>
 							</div>
@@ -173,22 +301,51 @@
 								</div>
 								<div class="b-items__cars-one-info">
 									<header class="b-items__cars-one-info-header s-lineDownLeft">
-										<h2>Lexus LS460 F Sport</h2>
-										<span>$73,445</span>
+										<h2 class="nametag">2017 Mercedes-Benz S Class</h2>
+										<span class="price">$ 34948</span>
 									</header>
-									<p>
-										The LS was the first Japanese car to mix European luxury with vaunted Japanese reliability, and it continues offering that compelling combination today
-									</p>
 									<div class="b-items__cars-one-info-km">
-										<span class="fa fa-tachometer"></span> 35,000 KM
+										<span class="fa fa-tachometer"></span>
+										<span class="mileage">Mileage: 27000</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class="fa fa-cogs"></span>
+										<span class="transmission">Transmission: Automatic</span>
 									</div>
-									<div class="b-items__cars-one-info-details">
-										<div class="b-featured__item-links">
-											<a>Registered 2017</a>
-											<a>Used</a>
-											<a>8-Speed Automatic</a>
-											<a>Petrol</a>
-										</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-bars"></span>
+										<span class="engineSize">Displacement: 2.1</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;
+										<span class="fa fa-tint"></span>
+										<span class="fuelType">Fuel Type: Hybrid</span>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-car"></span>
+										<span class="mpg">MPG: 61.4</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;
+										<a class="btn m-btn m-readMore wow zoomInUp" data-wow-delay="0.5s" onclick="showListingDetail(3)">view listings<span class="fa fa-angle-right"></span></a>
 									</div>
 								</div>
 							</div>
@@ -198,23 +355,51 @@
 								</div>
 								<div class="b-items__cars-one-info">
 									<header class="b-items__cars-one-info-header s-lineDownLeft">
-										<h2>Mercedes-Benz GL63 AMG</h2>
-										<span>$120,375</span>
+										<h2 class="nametag">2016 Toyota GT86</h2>
+										<span class="price">$ 16000</span>
 									</header>
-									<p>
-										The top-flight GL63 AMG is built for those who crave performance, luxury, and exclusivity
-										— you know; the                     finer things in life. AMG works its magic on the GL
-									</p>
 									<div class="b-items__cars-one-info-km">
-										<span class="fa fa-tachometer"></span> 35,000 KM
+										<span class="fa fa-tachometer"></span>
+										<span class="mileage">Mileage: 24089</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class="fa fa-cogs"></span>
+										<span class="transmission">Transmission: Manual</span>
 									</div>
-									<div class="b-items__cars-one-info-details">
-										<div class="b-featured__item-links">
-											<a>Registered 2017</a>
-											<a>Used</a>
-											<a>7-Speed Automatic</a>
-											<a>Petrol</a>
-										</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-bars"></span>
+										<span class="engineSize">Displacement: 2.0</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;
+										<span class="fa fa-tint"></span>
+										<span class="fuelType">Fuel Type: Petrol</span>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="b-items__cars-one-info-km">
+										<span class="fa fa-car"></span>
+										<span class="mpg">MPG: 36.2</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;
+										<a class="btn m-btn m-readMore wow zoomInUp" data-wow-delay="0.5s" onclick="showListingDetail(4)">view listings<span class="fa fa-angle-right"></span></a>
 									</div>
 								</div>
 							</div>

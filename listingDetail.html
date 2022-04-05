@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>About Us</title>
+		<title>Listing Detail</title>
 
 		<link href="css/master.css" rel="stylesheet">
 
@@ -20,6 +20,36 @@
 		<script src="/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function(){
+				const queryString = window.location.search;
+				const urlParams = new URLSearchParams(queryString);
+				const listingbody = urlParams.get('listingbody');
+				listing = JSON.parse(listingbody);
+				console.log(listing);
+				var carDiv = document.getElementsByClassName("carDiv")[0];
+				const brand_map = {
+					"audi": "Audi",
+					"bmw": "BMW",
+					"ford": "Ford",
+					"hyundi": "Hyundai",
+					"merc": "Mercedes-Benz",
+					"skoda": "Skoda",
+					"toyota": "Toyota",
+					"vauxhall": "Vauxhall",
+					"vw": "Volkswagen"
+				}
+				carDiv.querySelector(".nametag").innerHTML = listing["year"] + " " + brand_map[listing["brand"]] + " " + listing["model"];
+				carDiv.querySelector(".price").innerHTML = "$ " + listing["price"];
+				carDiv.querySelector(".mileage").innerHTML = "Mileage: " + listing["mileage"];
+				carDiv.querySelector(".transmission").innerHTML = "Transmission: " + listing["transmission"];
+				carDiv.querySelector(".engineSize").innerHTML = "Displacement: " + listing["engineSize"];
+				carDiv.querySelector(".fuelType").innerHTML = "Fuel Type: " + listing["fuelType"];
+				carDiv.querySelector(".mpg").innerHTML = "MPG: " + listing["mpg"];
+				document.querySelector("img").src = listing["img_src"];
+			});
+		</script>
 
 	</head>
 	<body class="m-about" data-scrolling-animations="true">
@@ -57,75 +87,85 @@
 
 		<section class="b-pageHeader">
 			<div class="container">
-				<h1 class="wow zoomInLeft" data-wow-delay="0.7s">About Us</h1>
+					<h1 class="wow zoomInLeft" data-wow-delay="0.7s">Listing Detail</h1>
 			</div>
 		</section><!--b-pageHeader-->
 
 		<div class="b-breadCumbs s-shadow">
 			<div class="container">
-				<a href="index.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="about.html" class="b-breadCumbs__page m-active">About Us</a>
+				<a href="index.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a class="b-breadCumbs__page m-active">Listing Detail</a>
 			</div>
 		</div><!--b-breadCumbs-->
+
+
+
+
+
+
+
+
+
+
 
 		<section class="b-best">
 			<div class="container">
 				<div class="row">
+					<div class="b-items__cars-one-img">
+						<img src="media/270x230/dodge.jpg" alt='dodge'>
+					</div>
 					<div class="col-sm-6 col-xs-12">
-						<div class="b-best__info">
-							<header class="s-lineDownLeft b-best__info-head">
-								<h2 class="wow zoomInUp" data-wow-delay="0.5s">The Best Used Vehicles Search Platform</h2>
+						<div class="b-best__info carDiv">
+							<header class="s-lineDownLeft b-best__info-head b-items__cars-one-info-header">
+								<h2 class="wow zoomInUp nametag" data-wow-delay="0.5s">2016 Audi A6</h2>
+                                <span class="price">$ 16500</span>
 							</header>
-							<p class="wow zoomInUp" data-wow-delay="0.5s">We aggregate millions of listings from dealers and private sellers, showing all the results for your search from each of our listings partners. We also generate recommendations on best suitable cars based on your budget range. Our goal is to capture all the results in single search, to save you time and help you find your ideal next car.</p>
+							<div class="b-items__cars-one-info-km">
+								<span class="fa fa-tachometer"></span>
+								<span class="mileage">Mileage: 36200</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="fa fa-cogs"></span>
+								<span class="transmission">Transmission: Automatic</span>
+							</div>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="b-items__cars-one-info-km">
+								<span class="fa fa-bars"></span>
+								<span class="engineSize">Displacement: 2.0</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;
+								<span class="fa fa-tint"></span>
+								<span class="fuelType">Fuel Type: Diesel</span>
+							</div>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="b-items__cars-one-info-km">
+								<span class="fa fa-car"></span>
+								<span class="mpg">MPG: 64.2</span>
+							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-xs-12">
+					<!-- <div class="col-sm-6 col-xs-12">
 						<img class="img-responsive center-block wow zoomInUp" data-wow-delay="0.5s" alt="best" src="media/about/best1.jpg" />
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</section><!--b-best-->
 
-		<section class="b-more">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6 col-xs-12">
-						<div class="b-more__why wow zoomInLeft" data-wow-delay="0.5s">
-							<h2 class="s-title">WHY CHOOSE US</h2>
-							<p>Our purpose defines everything we do. We exist to grow both our car buying audience and core advertising business. We will change how the UK shops for cars by providing the best online car searching experience, enabling all retailers to post online and all customers to search online. Our purpose has helped us form our strategy which we display as three commercial growth horizons:</p>
-							<ul class="s-list">
-								<li><span class="fa fa-check"></span>Descent User Experience</li>
-								<li><span class="fa fa-check"></span>Faster Click-to-Display Speed</li>
-								<li><span class="fa fa-check"></span>Increasing &amp; Solid Database</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6 col-xs-12">
-						<div class="b-more__info wow zoomInRight" data-wow-delay="0.5s">
-							<h2 class="s-title">MORE INFO</h2>
-							<div class="b-more__info-block">
-								<div class="b-more__info-block-title">Transparent Price for Everyone<a class="j-more" href="#"><span class="fa fa-angle-left"></span></a></div>
-								<div class="b-more__info-block-inside j-inside">
-									<p>We strive to create trust and transparentcy throughout the automotive market. CarSpy allows potential car buyers and sellers to focus on the things that really matter.</p>
-								</div>
-							</div>
-							<div class="b-more__info-block">
-								<div class="b-more__info-block-title">Autorama Acquisition<a href="#" class="j-more"><span class="fa fa-angle-left"></span></a></div>
-								<div class="b-more__info-block-inside j-inside">
-									<p>As we continue to ensure we have the largest choice of cars to search online, we have agreed to acquire Autorama Limited -one of the UK's largest transactional marketplaces for listing new vehicles.</p>
-								</div>
-							</div>
-							<div class="b-more__info-block">
-								<div class="b-more__info-block-title">Data Authenticity<a href="#" class="j-more"><span class="fa fa-angle-left"></span></a></div>
-								<div class="b-more__info-block-inside j-inside">
-									<p>When data is hosted onsite,
-										the process of data authenticity can certainly be a major challenge. However,instead of hosting within a traditional internal IT datacenter, our data is stored in a database from Amazon Web Service which is a rock-solid provider.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section><!--b-more-->
+
+
+
+
+
+
+
+
 
 		<div class="b-features">
 			<div class="container">
