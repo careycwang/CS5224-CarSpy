@@ -22,6 +22,8 @@
 		<![endif]-->
 
 		<script>
+			var listing;
+
 			document.addEventListener("DOMContentLoaded", function(){
 				const queryString = window.location.search;
 				const urlParams = new URLSearchParams(queryString);
@@ -48,6 +50,51 @@
 				carDiv.querySelector(".fuelType").innerHTML = "Fuel Type: " + listing["fuelType"];
 				carDiv.querySelector(".mpg").innerHTML = "MPG: " + listing["mpg"];
 				document.querySelector("img").src = listing["img_src"];
+
+				if (listing["stared"] === "1") {
+					var star = document.querySelector(".star");
+					star.classList.remove("glyphicon-star-empty");
+					star.classList.add("glyphicon-star");
+				}
+
+				document.querySelector(".star").addEventListener("click", function() {
+					var star = document.querySelector(".star");
+					if (star.classList.contains('glyphicon-star-empty')) {
+						star.classList.remove("glyphicon-star-empty");
+						star.classList.add("glyphicon-star");
+						listing["stared"] = "1"
+					} else {
+						star.classList.remove("glyphicon-star");
+						star.classList.add("glyphicon-star-empty");
+						listing["stared"] = "0"
+					}
+
+					// instantiate a headers object
+					var myHeaders = new Headers();
+					// add content type header to object
+					myHeaders.append("Content-Type", "application/json");
+					// using built in JSON utility package turn object to string and store in a variable
+					var star_new_history = "stared-" + listing["stared"];
+					var raw = JSON.stringify({"uuid": listing["uuid"], "history": star_new_history});
+					// create a JSON object with parameters for API call and store in a variable
+					var requestOptions = {
+						method: 'POST',
+						headers: myHeaders,
+						body: raw,
+						redirect: 'follow'
+					};
+					// make API call with parameters and use promises to get response
+					fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/update_history", requestOptions)
+					.then(response => response.text())
+					.then(result => {
+						if (listing["stared"] === "1") {
+							alert("Successfully Added to Your Preference!");
+						} else {
+							alert("Removed from Your Preference.");
+						}
+					})
+					.catch(error => console.log('error', error));
+				});
 			});
 		</script>
 
@@ -97,16 +144,6 @@
 			</div>
 		</div><!--b-breadCumbs-->
 
-
-
-
-
-
-
-
-
-
-
 		<section class="b-best">
 			<div class="container">
 				<div class="row">
@@ -151,21 +188,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="col-sm-6 col-xs-12">
-						<img class="img-responsive center-block wow zoomInUp" data-wow-delay="0.5s" alt="best" src="media/about/best1.jpg" />
-					</div> -->
+					<span class="star glyphicon glyphicon-star-empty" style="font-size: 25px; color:gold;"></span>
 				</div>
 			</div>
 		</section><!--b-best-->
-
-
-
-
-
-
-
-
-
 
 		<div class="b-features">
 			<div class="container">

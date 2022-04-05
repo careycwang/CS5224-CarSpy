@@ -25,11 +25,6 @@
 			var listings;
 
 			document.addEventListener("DOMContentLoaded", function(){
-				document.querySelector(".star").addEventListener("click", function() {
-					console.log("clicked!")
-					document.querySelector(".star").classList.remove("glyphicon-star-empty");
-					document.querySelector(".star").classList.add("glyphicon-star");
-				});
 				const queryString = window.location.search;
 				if (queryString === "") {
 					return;
@@ -75,7 +70,28 @@
 				var sent_listing = listings[parseInt(index)];
 				var carDivs = document.getElementsByClassName("carDiv");
 				sent_listing["img_src"] = carDivs[parseInt(index)].querySelector("img").src;
-				window.location.href = 'listingDetail.html' + "?listingbody=" + JSON.stringify(sent_listing);
+
+				// instantiate a headers object
+	            var myHeaders = new Headers();
+	            // add content type header to object
+	            myHeaders.append("Content-Type", "application/json");
+	            // using built in JSON utility package turn object to string and store in a variable
+				sent_listing["viewed"] = "1"
+	            var raw = JSON.stringify({"uuid": sent_listing["uuid"], "history": "viewed"});
+	            // create a JSON object with parameters for API call and store in a variable
+	            var requestOptions = {
+	                method: 'POST',
+	                headers: myHeaders,
+	                body: raw,
+	                redirect: 'follow'
+	            };
+	            // make API call with parameters and use promises to get response
+	            fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/update_history", requestOptions)
+	            .then(response => response.text())
+	            .then(result => {
+					window.location.href = 'listingDetail.html' + "?listingbody=" + JSON.stringify(sent_listing);
+				})
+	            .catch(error => console.log('error', error));
 			}
 		</script>
 
@@ -139,9 +155,6 @@
 										<h2 class="nametag">2016 Audi A6</h2>
 										<span class="price">$ 16500</span>
 									</header>
-									<div>
-									  <span class="star glyphicon glyphicon-star-empty" style="font-size: 25px; color:gold;"></span>
-									</div>
 									<div class="b-items__cars-one-info-km">
 										<span class="fa fa-tachometer"></span>
 										<span class="mileage">Mileage: 36200</span>
