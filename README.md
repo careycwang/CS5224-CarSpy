@@ -12,13 +12,13 @@ Our architecture diagram:
 ![alt text](./img/Architecture_Diagram.jpg)
 
 ### Amplify
-See `\css`, `\js` and `index.html` folder
+See `\css`, `\js` folder and `index.html`
 
 ### Lambda
-See codes under `\lambda` folder
+See `\lambda` folder
 
 ### CloudFormation
-See codes under `\cloudformation` folder
+See `\cloudformation` folder
 
 ## Contributor
 - [Wang Changqin](https://github.com/archiewang0716)
