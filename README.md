@@ -3,6 +3,8 @@ CS5224 Final Report: CarSpy - A Recommender System for Used Cars
 
 This website is for automatic deployment on Amplify.
 
-Amplify Codes: See codes 
+Amplify Codes: See `index.html`, `\css`, `\js` folder
+
 Lambda Codes: See codes under `\lambda` folder
+
 CloudFormation Codes: See codes under `\cloudformation` folder
