@@ -103,7 +103,7 @@
 					"year_range": [parseInt(minYear.value), parseInt(maxYear.value)],
 					"price_range": [parseInt(minPrice.value), parseInt(maxPrice.value)],
 					"recommend": true,
-					"history": false
+					"history": true
 				});
 				// create a JSON object with parameters for API call and store in a variable
 				var requestOptions = {
@@ -128,8 +128,8 @@
 				myHeaders.append("Content-Type", "application/json");
 				// using built in JSON utility package turn object to string and store in a variable
 				var raw = JSON.stringify({
-					"recommend": false,
-					"history": false
+					"recommend": true,
+					"history": true
 				});
 				// create a JSON object with parameters for API call and store in a variable
 				var requestOptions = {
