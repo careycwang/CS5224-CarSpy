@@ -12,3 +12,9 @@ Amplify Codes: See `\css`, `\js` and `index.html` folder
 Lambda Codes: See codes under `\lambda` folder
 
 CloudFormation Codes: See codes under `\cloudformation` folder
+
+## Contributor
+- [Wang Changqin](https://github.com/archiewang0716)
+- [Zhang Haolin](https://github.com/A0236053M)
+- [Zhang Lei](https://github.com/AronnZzz)
+- [Liu Haoyang](https://github.com/Ethan601)
