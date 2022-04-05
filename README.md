@@ -8,7 +8,7 @@ You can click [CarSpy Link](https://cs4248-carspy.auth.us-east-1.amazoncognito.c
 This website is for automatic deployment on Amplify.
 
 Our architecture diagram: 
-![alt text](img\Architecture Diagram.jpg)
+![alt text](img/Architecture Diagram.jpg)
 
 ### Amplify
 See `\css`, `\js` and `index.html` folder
