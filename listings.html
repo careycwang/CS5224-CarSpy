@@ -94,6 +94,32 @@
 				})
 	            .catch(error => console.log('error', error));
 			}
+
+			var defaultListings = ()=>{
+				// instantiate a headers object
+				var myHeaders = new Headers();
+				// add content type header to object
+				myHeaders.append("Content-Type", "application/json");
+				// using built in JSON utility package turn object to string and store in a variable
+				var raw = JSON.stringify({
+					"recommend": true,
+					"history": true
+				});
+				// create a JSON object with parameters for API call and store in a variable
+				var requestOptions = {
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
+				};
+				// make API call with parameters and use promises to get response
+				fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/recommend", requestOptions)
+				.then(response => response.text())
+				.then(result => {
+					window.location.href = 'listings.html' + "?listingbody=" + JSON.parse(result).body;
+				})
+				.catch(error => console.log('error', error));
+			}
 		</script>
 
 	</head>
@@ -120,7 +146,7 @@
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
 									<li><a href="index.html">Home</a></li>
-									<li><a href="listings.html">listing</a></li>
+									<li><a href="#" onclick="defaultListings()">listing</a></li>
 									<li><a href="about.html">About</a></li>
 								</ul>
 							</div>
