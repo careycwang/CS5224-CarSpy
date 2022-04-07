@@ -105,9 +105,9 @@
 			var slider = $('.slider').length;
 			if(slider){
 		        jQuery("#slidePriceDiv .slider").slider({
-		            min: 3000,
+		            min: 10000,
 		            max: 99999,
-		            values: [3000,99999],
+		            values: [10000,99999],
 		            range: true,
 		            slide: function(event, ui){
 		                $("#slidePriceDiv .ui-slider-handle span.min").text(ui.values[0]);
@@ -118,7 +118,7 @@
 		                $("#slidePriceDiv input.j-max").val(ui.values[1]);
 		            }
 		        });
-		        $("#slidePriceDiv .ui-slider-handle:first-of-type").append("<span class='min'>3000</span>");
+		        $("#slidePriceDiv .ui-slider-handle:first-of-type").append("<span class='min'>10000</span>");
 		        $("#slidePriceDiv .ui-slider-handle:last-of-type").append("<span class='max'>99999</span>");
 
 				jQuery("#slideYearDiv .slider").slider({
@@ -295,7 +295,7 @@
 					lineCap: false,
 					lineWidth: false,
 					size: false,
-					animate: 3000,
+					animate: 10000,
 					onStep: function(from, to, percent){
 						$(this.el).find('.percent').text(Math.round(percent));
 					}
