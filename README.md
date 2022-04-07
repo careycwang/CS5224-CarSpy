@@ -20,6 +20,9 @@ See `\lambda` folder
 ### CloudFormation
 See `\cloudformation` folder
 
+## Dataset
+We obtain used cars data from Kaggle's [100,000 UK Used Car Data set](https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes). It contains the scraped data of 100,000 used cars listings, which have been separated into files corresponding to each car manufacturer.
+
 ## Contributor
 - [Wang Changqin](https://github.com/archiewang0716)
 - [Zhang Haolin](https://github.com/A0236053M)
