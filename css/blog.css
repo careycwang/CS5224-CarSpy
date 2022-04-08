@@ -1,16 +1,3 @@
-/*------------------------------------------------------------------
-[Table of contents]
-
- - Blog
- - Blog posts
- - Blog two
- - Article
-
-- Author:  Andrey Sokoltsov
-- Profile:	http://themeforest.net/user/andreysokoltsov
-
--------------------------------------------------------------------*/
-
 /* Blog */
 .b-blog{
     padding: 65px 0 135px 0;
@@ -149,7 +136,7 @@
 .b-blog__aside-reviews-posts-one{
     padding-bottom: 18px;
     border-bottom: 1px solid #eee;
-    margin-bottom: 18px;  
+    margin-bottom: 18px;
 }
 
 .b-blog__aside-reviews-posts-one:last-child{
@@ -159,7 +146,7 @@
 }
 
 .b-blog__aside-reviews-posts-one-info{
-    margin-left: 5px; 
+    margin-left: 5px;
 }
 
 .b-blog__aside-reviews-posts-one-info p{
@@ -176,7 +163,7 @@
 }
 
 .b-blog__aside-archives{
-    margin-bottom: 55px;   
+    margin-bottom: 55px;
 }
 
 .b-blog__aside .b-detail__main-aside-about-call{
@@ -232,7 +219,7 @@
 /* Blog posts */
 
 .b-blog__posts-one-body{
-   margin-left: 25px; 
+   margin-left: 25px;
 }
 
 .b-blog__posts-one-body-head{
@@ -317,8 +304,8 @@
 .btn.m-btn.m-readMore{
     font: 600 10px 'Open Sans',sans-serif;
     border:1px solid #eee;
-    padding:3px 3px 3px 15px ; 
-    text-transform: uppercase;  
+    padding:3px 3px 3px 15px ;
+    text-transform: uppercase;
 }
 
 .b-blog__posts-one a.b-items__cars-one-img-video{
@@ -330,7 +317,7 @@
 
 .b-blog__posts-one-body-main-link{
     padding: 35px;
-    margin-bottom: 40px; 
+    margin-bottom: 40px;
 }
 
 .b-blog__posts-one-body-main-link a{
@@ -490,7 +477,7 @@
 
 .b-article__main-author h3 span{
     font: 400 14px 'Open Sans',sans-serif;
-    margin-right: 3px; 
+    margin-right: 3px;
 }
 
 .b-article__main-author-social{

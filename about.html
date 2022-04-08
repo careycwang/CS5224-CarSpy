@@ -16,30 +16,23 @@
 		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color5.css" title="color5" media="all" />
 		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color6.css" title="color6" media="all" />
 
-		<!--[if lt IE 9]>
-		<script src="/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
 		<script>
+			// call-back function called when redirecting to listing page without user search
 			var defaultListings = ()=>{
-				// instantiate a headers object
 				var myHeaders = new Headers();
-				// add content type header to object
 				myHeaders.append("Content-Type", "application/json");
-				// using built in JSON utility package turn object to string and store in a variable
+				// no user input needed to pass to back-end when getting default car listings
 				var raw = JSON.stringify({
 					"recommend": true,
 					"history": true
 				});
-				// create a JSON object with parameters for API call and store in a variable
 				var requestOptions = {
 					method: 'POST',
 					headers: myHeaders,
 					body: raw,
 					redirect: 'follow'
 				};
-				// make API call with parameters and use promises to get response
+				// call API Gateway and pass the request parameters
 				fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/recommend", requestOptions)
 				.then(response => response.text())
 				.then(result => {

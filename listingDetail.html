@@ -16,15 +16,12 @@
 		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color5.css" title="color5" media="all" />
 		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color6.css" title="color6" media="all" />
 
-		<!--[if lt IE 9]>
-		<script src="/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
 		<script>
 			var listing;
 
+			// after DOM is loaded, display car detail info on webpage
 			document.addEventListener("DOMContentLoaded", function(){
+				// parse car detail info string
 				const queryString = window.location.search;
 				const urlParams = new URLSearchParams(queryString);
 				const listingbody = urlParams.get('listingbody');
@@ -42,6 +39,7 @@
 					"vauxhall": "Vauxhall",
 					"vw": "Volkswagen"
 				}
+				// insert each car detail info
 				carDiv.querySelector(".nametag").innerHTML = listing["year"] + " " + brand_map[listing["brand"]] + " " + listing["model"];
 				carDiv.querySelector(".price").innerHTML = "$ " + listing["price"];
 				carDiv.querySelector(".mileage").innerHTML = "Mileage: " + listing["mileage"];
@@ -51,12 +49,14 @@
 				carDiv.querySelector(".mpg").innerHTML = "MPG: " + listing["mpg"];
 				document.querySelector("img").src = listing["img_src"];
 
+				// if the car post is starred before, enable the star
 				if (listing["stared"] === "1") {
 					var star = document.querySelector(".star");
 					star.classList.remove("glyphicon-star-empty");
 					star.classList.add("glyphicon-star");
 				}
 
+				// call-back function called when star is clicked or unclicked
 				document.querySelector(".star").addEventListener("click", function() {
 					var star = document.querySelector(".star");
 					if (star.classList.contains('glyphicon-star-empty')) {
@@ -69,21 +69,18 @@
 						listing["stared"] = "0"
 					}
 
-					// instantiate a headers object
 					var myHeaders = new Headers();
-					// add content type header to object
 					myHeaders.append("Content-Type", "application/json");
-					// using built in JSON utility package turn object to string and store in a variable
+					// pass current updated star status to the back-end
 					var star_new_history = "stared-" + listing["stared"];
 					var raw = JSON.stringify({"uuid": listing["uuid"], "history": star_new_history});
-					// create a JSON object with parameters for API call and store in a variable
 					var requestOptions = {
 						method: 'POST',
 						headers: myHeaders,
 						body: raw,
 						redirect: 'follow'
 					};
-					// make API call with parameters and use promises to get response
+					// call API Gateway and pass request parameters
 					fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/update_history", requestOptions)
 					.then(response => response.text())
 					.then(result => {
@@ -97,24 +94,22 @@
 				});
 			});
 
+			// call-back function called when redirecting to listing page without user search
 			var defaultListings = ()=>{
-				// instantiate a headers object
 				var myHeaders = new Headers();
-				// add content type header to object
 				myHeaders.append("Content-Type", "application/json");
-				// using built in JSON utility package turn object to string and store in a variable
+				// no user input needed to pass to back-end when getting default car listings
 				var raw = JSON.stringify({
 					"recommend": true,
 					"history": true
 				});
-				// create a JSON object with parameters for API call and store in a variable
 				var requestOptions = {
 					method: 'POST',
 					headers: myHeaders,
 					body: raw,
 					redirect: 'follow'
 				};
-				// make API call with parameters and use promises to get response
+				// call API Gateway and pass the request parameters
 				fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/recommend", requestOptions)
 				.then(response => response.text())
 				.then(result => {
@@ -123,6 +118,7 @@
 				.catch(error => console.log('error', error));
 			}
 
+			// call-back function when the contact button is clicked
 			var callAgent = ()=>{
 				alert("Call our agent: 0900-689-5652\n\nService Hour: 9:00AM-5:00PM (Monday to Friday)");
 			}

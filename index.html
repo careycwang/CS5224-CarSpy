@@ -16,13 +16,8 @@
 		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color5.css" title="color5" media="all" />
 		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color6.css" title="color6" media="all" />
 
-		<!--[if lt IE 9]>
-		<script src="/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
 		<script>
-	        // define the callAPI function that takes a first name and last name as parameters
+	        // call-back function called to render model name list when user selects a brand
 	        var displayModels = ()=>{
 				var selectBrand = document.getElementById('selectBrand');
 				var selectModel = document.getElementById('selectModel');
@@ -37,20 +32,17 @@
 					return;
 				}
 
-	            // instantiate a headers object
 	            var myHeaders = new Headers();
-	            // add content type header to object
 	            myHeaders.append("Content-Type", "application/json");
-	            // using built in JSON utility package turn object to string and store in a variable
+	            // pass user's selected brand to back-end
 	            var raw = JSON.stringify({'brand': brand});
-	            // create a JSON object with parameters for API call and store in a variable
 	            var requestOptions = {
 	                method: 'POST',
 	                headers: myHeaders,
 	                body: raw,
 	                redirect: 'follow'
 	            };
-	            // make API call with parameters and use promises to get response
+	            // call API Gateway and pass request parameters
 	            fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
 	            .then(response => response.text())
 	            .then(result => {
@@ -68,8 +60,9 @@
 	            .catch(error => console.log('error', error));
 	        }
 
-			// define the callAPI function that takes a first name and last name as parameters
+			// call-back function called when the user inputs filtering conditions and clicks the search button
 			var recommendPosts = ()=>{
+				// retrieve user's inputs of filtering conditions from the webpage
 				var selectBrand = document.getElementById('selectBrand');
 				var selectModel = document.getElementById('selectModel');
 				var minPrice = document.getElementById('minPrice');
@@ -92,11 +85,9 @@
 					maxYear.value = 2020;
 				}
 
-				// instantiate a headers object
 				var myHeaders = new Headers();
-				// add content type header to object
 				myHeaders.append("Content-Type", "application/json");
-				// using built in JSON utility package turn object to string and store in a variable
+				// pass user's inputs of filtering conditions to back-end
 				var raw = JSON.stringify({
 					"brand": selectBrand.value,
 					"model": selectModel.value,
@@ -105,14 +96,13 @@
 					"recommend": true,
 					"history": true
 				});
-				// create a JSON object with parameters for API call and store in a variable
 				var requestOptions = {
 					method: 'POST',
 					headers: myHeaders,
 					body: raw,
 					redirect: 'follow'
 				};
-				// make API call with parameters and use promises to get response
+				// call API Gateway and pass request parameters
 				fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/recommend", requestOptions)
 				.then(response => response.text())
 				.then(result => {
@@ -121,24 +111,22 @@
 				.catch(error => console.log('error', error));
 			}
 
+			// call-back function called when redirecting to listing page without user search
 			var defaultListings = ()=>{
-				// instantiate a headers object
 				var myHeaders = new Headers();
-				// add content type header to object
 				myHeaders.append("Content-Type", "application/json");
-				// using built in JSON utility package turn object to string and store in a variable
+				// no user input needed to pass to back-end when getting default car listings
 				var raw = JSON.stringify({
 					"recommend": true,
 					"history": true
 				});
-				// create a JSON object with parameters for API call and store in a variable
 				var requestOptions = {
 					method: 'POST',
 					headers: myHeaders,
 					body: raw,
 					redirect: 'follow'
 				};
-				// make API call with parameters and use promises to get response
+				// call API Gateway and pass the request parameters
 				fetch("https://o0ga5fez2c.execute-api.us-east-1.amazonaws.com/dev/recommend", requestOptions)
 				.then(response => response.text())
 				.then(result => {

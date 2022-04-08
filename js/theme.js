@@ -1,10 +1,3 @@
-/*------------------------------------------------------------------
-[Table of contents]
-
-- Author:  Andrey Sokoltsov
-- Profile:	http://themeforest.net/user/andreysokoltsov
---*/
-
 (function() {
 
 	"use strict";

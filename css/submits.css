@@ -1,17 +1,3 @@
-/*------------------------------------------------------------------
-[Table of contents]
-
- - Submit1
- - Submit2
- - Submit3
- - Submit4
- - Submit5
-
-- Author:  Andrey Sokoltsov
-- Profile:	http://themeforest.net/user/andreysokoltsov
-
--------------------------------------------------------------------*/
-
 /* Submit1 */
 /*infoBar*/
 .m-submit1 .b-infoBar,.m-submit2 .b-infoBar,.m-submit3 .b-infoBar,.m-submit4 .b-infoBar,.m-submit5 .b-infoBar{
@@ -19,7 +5,7 @@
 }
 
 .b-infoBar__progress-line{
-   box-shadow:0 0 5px rgba(0,0,0,0.2); 
+   box-shadow:0 0 5px rgba(0,0,0,0.2);
     border-top-left-radius:25px;
     border-bottom-left-radius:25px;
 }
@@ -201,7 +187,7 @@
 }
 
 .b-submit__main-file:last-child{
-    margin-bottom: 35px;  
+    margin-bottom: 35px;
 }
 
 .b-submit__main-file label.btn.m-btn{
@@ -273,7 +259,7 @@
 }
 
 .b-submit__main-contacts-price-input  span.fa{
-    position: absolute; 
+    position: absolute;
     font-size:20px;
     padding-right: 10px;
     border-right:1px solid #ccc;
@@ -391,7 +377,7 @@
 }
 
 .b-submit__main-plan-money-note{
-   font: 400 13px 'Open Sans',sans-serif; 
+   font: 400 13px 'Open Sans',sans-serif;
 }
 
 .b-submit__main-plan label.s-submitCheckLabel{

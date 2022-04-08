@@ -1,18 +1,3 @@
-/*------------------------------------------------------------------
-[Table of contents]
-
- - Global
- - Home
- - ListTable
- - Detail
- - Compare
- - Blog
-
-- Author:  Andrey Sokoltsov
-- Profile:	http://themeforest.net/user/andreysokoltsov
-
--------------------------------------------------------------------*/
-
 /* Global */
 body{
     background: #fff;
@@ -66,7 +51,7 @@ body{
 }
 
 .navbar-toggle{
-    background:#F76D2B ;  
+    background:#F76D2B ;
 }
 
  .navbar-toggle span{
@@ -108,7 +93,7 @@ body{
 }
 
 .b-search__main-form-submit{
-    
+
 }
 /*b-slider*/
 
@@ -201,7 +186,7 @@ body{
 
 .b-featured__item .m-premium{
     background: #3cd225;
-    color:#fff;   
+    color:#fff;
 }
 
 .b-featured__item-price{
@@ -354,7 +339,7 @@ body{
 
 /*b-auto*/
 .b-auto{
-   background: #fff; 
+   background: #fff;
 }
 
 .s-titleBg{
@@ -522,7 +507,7 @@ body{
 }
 
 .b-info__latest-article-info p span{
-    
+
 }
 
 .b-info__twitter-article-content p{
@@ -601,7 +586,7 @@ body{
 
 /*b-slider*/
 .m-home .b-slider__info p span{
-    background: #333333;   
+    background: #333333;
 }
 
 .m-home .b-slider__info .btn.m-btn{
@@ -631,7 +616,7 @@ body{
 }
 
 .m-home .b-search__main >h4{
-    color:#f76d2b;   
+    color:#f76d2b;
 }
 /*b-search*/
 
@@ -665,7 +650,7 @@ body{
 }
 
 .m-home .b-world__item-val-circles span{
-   background: #5d5d5d; 
+   background: #5d5d5d;
 }
 
 .m-home .b-world__item-num{
@@ -715,7 +700,7 @@ body{
 }
 
 .m-home .b-count__item h2{
-   color:#f76d2b; 
+   color:#f76d2b;
 }
 
 .m-home .b-count__item h5{
@@ -741,7 +726,7 @@ body{
 }
 
 .m-home .b-homeReviews__main-person-name em{
-    color:#f76d2b; 
+    color:#f76d2b;
 }
 
 .m-home .b-homeReviews .owl-buttons > div{
@@ -945,19 +930,19 @@ body{
 }
 
 .b-items__cars-one-img-type.m-premium{
-   background: #3cd225; 
+   background: #3cd225;
 }
 
 .b-items__cars-one-img-type.m-leasing{
-   background: #2475ce; 
+   background: #2475ce;
 }
 
 .b-items__cars-one-img-type.m-listing{
-   background: #d90000; 
+   background: #d90000;
 }
 
 .b-items__cars-one-img-type.m-owner{
-   background: #ffd24d; 
+   background: #ffd24d;
 }
 
 .b-items__cars-one-img-check{
@@ -1115,7 +1100,7 @@ body{
 }
 
 .b-detail__head h3{
-  color:#999;  
+  color:#999;
 }
 
 .b-detail__head-price-num{
@@ -1403,7 +1388,7 @@ select.m-select + span.fa{
 }
 
 .b-blog__posts-one-body-head-notes{
-   color:#999; 
+   color:#999;
 }
 
 .b-blog__posts-one-body-main > p{
@@ -1460,11 +1445,11 @@ select.m-select + span.fa{
     .b-nav__list{
         background: #555;
     }
-    
+
     .b-nav__list ul li a{
         color:#fff!important;
     }
-    
+
     ul.h-nav li a{
         color:#555!important;
     }
