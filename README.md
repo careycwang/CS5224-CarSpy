@@ -31,16 +31,8 @@ CS5224-CarSpy/
 |-- lambda/                 # backend files
 |-- img/                    # screenshots for our app
 |-- data/                   # dataset files and recommendation
+|-- cloudformation          # CloudFormation codes
 ```
-
-### Amplify
-See `\css`, `\js` folder and `index.html`
-
-### Lambda
-See `\lambda` folder
-
-### CloudFormation
-See `\cloudformation` folder
 
 ## Dataset
 We obtain used cars data from Kaggle's [100,000 Singapore Used Car Data set](https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes). It contains the scraped data of 100,000 used cars listings, which have been separated into files corresponding to each car manufacturer.
