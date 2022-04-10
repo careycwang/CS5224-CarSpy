@@ -46,8 +46,8 @@ We already deployed our SaaS application on AWS cloud. You can follow these step
 
 ### Steps to Deploy Our SaaS
 1. Set up a new AWS Amplify repository and link it to our GitHub where our project code stays: https://github.com/archiewang0716/CS5224-CarSpy.git
-2. Set up a new API Gateway, configure three POST methods:
-        - one under root resource, bind it to 
+2. For each folder under lambda/ folder, set up a new AWS Lambda for it.
+3. Configure a new API Gateway and define POST methods for newly created Lambda functions. CORS is needed to be enabled before deploying the API.
 
 ## Contributor
 - [Wang Changqin](https://github.com/archiewang0716)
