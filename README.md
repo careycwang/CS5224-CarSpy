@@ -1,5 +1,5 @@
 # CS5224-CarSpy
-CS5224 Final Report: CarSpy - A Recommender System for Used Cars
+CS5224 Final Report: CarSpy - An Intelligent Recommendation Platform to find your Dream Used Car in Singapore
 
 You can click [CarSpy Link](https://cs4248-carspy.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=7i41mg13jhsou7lrkdusc2kp9o&redirect_uri=https://main.d2vgm0hwfxxab2.amplifyapp.com/) to login our website.
 
