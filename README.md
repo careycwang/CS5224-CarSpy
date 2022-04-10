@@ -1,5 +1,5 @@
 # CS5224-CarSpy
-CS5224 Final Report: CarSpy - A Recommender System for Used Cars
+CS5224 Final Report: CarSpy - An Intelligent Recommendation Platform to find your Dream Used Car in Singapore
 
 You can click [CarSpy Link](https://cs4248-carspy.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=7i41mg13jhsou7lrkdusc2kp9o&redirect_uri=https://main.d2vgm0hwfxxab2.amplifyapp.com/) to login our website.
 
@@ -10,6 +10,28 @@ This GitHub is for automatic deployment on Amplify.
 Our architecture diagram: 
 
 ![alt text](./img/Architecture_Diagram.jpg)
+
+
+Our code files are:
+```
+CS5224-CarSpy/
+|-- README.md
+
+|-- assets/                 
+|-- css/
+|-- js/
+|-- fonts/
+|-- media/
+|-- images/
+|-- index.html
+|-- listings.html
+|-- listingDetail.html
+|-- about.html              # frontend files
+
+|-- lambda/                 # backend files
+|-- img/                    # screenshots for our app
+|-- data/                   # dataset files and recommendation
+```
 
 ### Amplify
 See `\css`, `\js` folder and `index.html`
