@@ -11,6 +11,26 @@ Our architecture diagram:
 
 ![alt text](./img/Architecture_Diagram.jpg)
 
+
+Our code files are:
+```
+CS5224-CarSpy/
+|-- README.md
+|-- assets/                 
+|-- css/
+|-- js/
+|-- fonts/
+|-- media/
+|-- images/
+|-- index.html
+|-- listings.html
+|-- listingDetail.html
+|-- about.html              # frontend files
+|-- lambda/                 # backend files
+|-- img/                    # screenshots for our app
+|-- data/                   # dataset files and recommendation
+```
+
 ### Amplify
 See `\css`, `\js` folder and `index.html`
 
