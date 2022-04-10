@@ -48,6 +48,13 @@ We already deployed our SaaS application on AWS cloud. You can follow these step
 1. Set up a new AWS Amplify repository and link it to our GitHub where our project code stays: https://github.com/archiewang0716/CS5224-CarSpy.git
 2. For each folder under lambda/ folder, set up a new AWS Lambda for it.
 3. Configure a new API Gateway and define POST methods for newly created Lambda functions. CORS is needed to be enabled before deploying the API.
+4. Build up user table with partition key **id** and car information table with partition key **uuid** in DynamoDB, and run the lambda function scipt(get_data) to load the car informantion from S3 to the DynamoDB.
+5. Create a new user pool in Cognito service, on the navigation bar on the left-side of the page, choose App clients under General settings.
+6. Choose Add an app client, and enter a name for your app client.
+7. Select Cognito User Pool as one of the Enabled Identity Providers.
+8. Unless you specifically want to exclude one, select the check boxes for all of the Allowed OAuth scopes.
+9. On the Domain name page, type a domain prefix that's available (here we choose **cs5224-carspy**) and save all changes.
+10. Configure the callback URL to the Amplify website url you have just created, and the sigp up page url is https://your_domain/login?response_type=code&client_id=your_app_client_id&redirect_uri=your_callback_url.
 
 ## Contributor
 - [Wang Changqin](https://github.com/archiewang0716)
