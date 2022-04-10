@@ -54,7 +54,8 @@ We already deployed our SaaS application on AWS cloud. You can follow these step
 7. Select Cognito User Pool as one of the Enabled Identity Providers.
 8. Unless you specifically want to exclude one, select the check boxes for all of the Allowed OAuth scopes.
 9. On the Domain name page, type a domain prefix that's available (here we choose **cs5224-carspy**) and save all changes.
-10. Configure the callback URL to the Amplify website url you have just created, and the sigp up page url is https://your_domain/login?response_type=code&client_id=your_app_client_id&redirect_uri=your_callback_url.
+10. Configure the callback URL to the Amplify website url you have just created, and the sigp up page url is "https://your_domain/login?response_type=code&client_id=your_app_client_id&redirect_uri=your_callback_url".
+Then you can follow the Steps to Use Our SaaS :')
 
 ## Contributor
 - [Wang Changqin](https://github.com/archiewang0716)
