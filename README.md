@@ -37,6 +37,11 @@ CS5224-CarSpy/
 ## Dataset
 We obtain used cars data from Kaggle's [100,000 Singapore Used Car Data set](https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes). It contains the scraped data of 100,000 used cars listings, which have been separated into files corresponding to each car manufacturer.
 
+### Steps to Use Our Saas
+We already deployed our SaaS application on AWS cloud. You can follow these steps to view our app:
+1. Go to https://cs5224-carspy.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=7i41mg13jhsou7lrkdusc2kp9o&redirect_uri=https://main.d2vgm0hwfxxab2.amplifyapp.com/
+2. 
+
 ## Contributor
 - [Wang Changqin](https://github.com/archiewang0716)
 - [Zhang Haolin](https://github.com/A0236053M)
