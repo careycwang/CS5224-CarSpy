@@ -37,14 +37,14 @@ CS5224-CarSpy/
 ## Dataset
 We obtain used cars data from Kaggle's [100,000 Singapore Used Car Data set](https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes). It contains the scraped data of 100,000 used cars listings, which have been separated into files corresponding to each car manufacturer.
 
-### Steps to Use Our SaaS
+## Steps to Use Our SaaS
 We already deployed our SaaS application on AWS cloud. You can follow these steps to view our app:
 1. Go to https://cs5224-carspy.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=7i41mg13jhsou7lrkdusc2kp9o&redirect_uri=https://main.d2vgm0hwfxxab2.amplifyapp.com/
 2. Sign up a new account and the verification code will be sent to your registered email.
 3. Log in and you will be redirected to the main page of our app.
 4. Start to search and enjoy our recommendations!
 
-### Steps to Deploy Our SaaS
+## Steps to Deploy Our SaaS
 1. Set up a new AWS Amplify repository and link it to our GitHub where our project code stays: https://github.com/archiewang0716/CS5224-CarSpy.git
 2. For each folder under lambda/ folder, set up a new AWS Lambda for it.
 3. Configure a new API Gateway and define POST methods for newly created Lambda functions. CORS is needed to be enabled before deploying the API.
